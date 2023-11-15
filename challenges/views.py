@@ -15,7 +15,7 @@ monthly_challenges = {
     'september': "Do 90 pushups",
     'oktober': "Do 100 pushups",
     'november': "Do 110 pushups",
-    'december': "Do 120 pushups"
+    'december': None
 }
 
 def index(request):
@@ -42,7 +42,7 @@ def monthly_challenge_by_number(request, month):
     months = list(monthly_challenges.keys())
 
     if month > len(months):
-        return HttpResponseNotFound()
+        raise Http404()
 
     redirect_month = months[month - 1]
     redirect_path = reverse('month-challenge', args = [redirect_month])
